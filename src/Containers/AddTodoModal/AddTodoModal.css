@@ -1,0 +1,40 @@
+.add-todo--root {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 540px;
+  height: 320px;
+  background-color: white;
+  box-shadow: 0 0 12px 8px rgba(0,0,0,0.4);
+  padding: 24px;
+  z-index: 11;
+}
+
+.modal--backdrop {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0,0,0,0.5);
+  z-index: 10;
+}
+
+.add-todo--modal-content {
+  display: flex;
+  flex-direction: column;  
+  justify-content: space-around;
+  height: 100%;
+}
+
+
+.add-todo--content {
+  height: 30%;
+}
+
+.add-todo--submit {
+  border: none;
+  box-shadow: 0 0 4px 2px rgba(0,0,0,0.2);
+  padding: 12px 28px;  
+}
