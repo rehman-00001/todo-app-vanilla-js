@@ -33,7 +33,7 @@ const setState = newState => {
       let updateRequired = true;      
       if (typeof listener.shouldUpdate === 'function') {
         updateRequired = listener.shouldUpdate(oldState);
-      }       
+      }
       if (updateRequired && typeof listener.render === 'function') {
         listener.render();
       }      

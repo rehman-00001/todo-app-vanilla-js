@@ -1,9 +1,14 @@
 import { state, setState } from '../../store.js';
+import Component from '../../utils/Component.js';
 
-class AddTodoModal {
-  constructor(_targetNode) {
-    state.subscribe(this);
-    this._targetNode = _targetNode;    
+class AddTodoModal extends Component {
+  bindFunctions() {
+    this.renderForm = this.renderForm.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+    this.onTitleChanged = this.onTitleChanged.bind(this);
+    this.onContentChanged = this.onContentChanged.bind(this);
+    this.saveTodoNote = this.saveTodoNote.bind(this);
+    this.attachListeners = this.attachListeners.bind(this);
   }
 
   renderForm() {
@@ -28,7 +33,8 @@ class AddTodoModal {
             class="add-todo--content"
             id="add-todo--content"
             placeholder="Your Todo list"
-          >${content}</textarea>
+          >${content}
+          </textarea>
           <button
             type="submit"
             id="add-todo--submit"
@@ -40,7 +46,7 @@ class AddTodoModal {
     `;
   };
 
-  shouldUpdate(previousState) {
+  shouldUpdate(previousState) {    
     return previousState.showAddTodoModal !== state.showAddTodoModal;
   };  
 
@@ -62,20 +68,18 @@ class AddTodoModal {
         ...addTodo, 
         title 
       }
-    });
-    console.log(state);
+    });    
   }
 
   onContentChanged(event) {
     const content = event.target.value;
     const { addTodo } = state;
-    setState({
+    setState({ 
       addTodo: { 
         ...addTodo, 
         content 
       }      
-    });
-    console.log(state);
+    });    
   }
 
   saveTodoNote() {
@@ -110,13 +114,17 @@ class AddTodoModal {
     const { showAddTodoModal } = state;
     if (showAddTodoModal) {
       this._targetNode.innerHTML = this.renderForm();      
-      this._targetNode.querySelector('#add-todo--title').onchange = this.onTitleChanged;
-      this._targetNode.querySelector('#add-todo--content').onchange = this.onContentChanged;
-      this._targetNode.querySelector('#add-todo--submit').onclick = this.saveTodoNote;
-      this._targetNode.querySelector('.modal--backdrop').onclick = this.closeModal;
+      this.attachListeners();
     } else {
       this._targetNode.innerHTML = null;
     }
+  }
+
+  attachListeners() {
+    this._targetNode.querySelector('#add-todo--title').onchange = this.onTitleChanged;
+    this._targetNode.querySelector('#add-todo--content').onchange = this.onContentChanged;
+    this._targetNode.querySelector('#add-todo--submit').onclick = this.saveTodoNote;
+    this._targetNode.querySelector('.modal--backdrop').onclick = this.closeModal;
   }
 }
 

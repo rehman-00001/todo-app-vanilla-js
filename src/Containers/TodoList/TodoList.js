@@ -1,10 +1,10 @@
 import { state, setState } from '../../store.js';
 import TodoItem from '../../Components/TodoItem/TodoItem.js'
+import Component from '../../utils/Component.js';
 
-class TodoList {
-  constructor(_targetNode) {
-    state.subscribe(this);
-    this._targetNode = _targetNode;    
+class TodoList extends Component {
+  bindFunctions() {
+    this.onTodoClicked = this.onTodoClicked.bind(this);
   }
 
   shouldUpdate(previousState) {    

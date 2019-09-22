@@ -9,8 +9,6 @@ const addTodoButton = document.getElementById('add-todo--btn');
 const todoList = new TodoList(todoListContainer);
 const addTodoModal = new AddTodoModal(modalContainer);
 
-todoList.render();
-addTodoModal.render();
 addTodoButton.addEventListener('click', () => {  
   setState({ showAddTodoModal: !state.showAddTodoModal });
 });
